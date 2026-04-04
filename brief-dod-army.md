@@ -1,0 +1,87 @@
+# Latent Archon — U.S. Army Capability Brief
+
+**Secure Document Intelligence for Army Programs**
+
+*UNCLASSIFIED — Approved for public distribution*
+
+---
+
+## Mission Relevance
+
+The U.S. Army generates and consumes an enormous volume of documents across acquisition, logistics, training, and operations — from Technical Manuals (TMs) and Field Manuals (FMs) to contract files, after-action reviews, and policy memoranda. Latent Archon provides Army organizations with a CUI-compliant AI platform to search, analyze, and extract intelligence from these documents without exposing sensitive data to unauthorized systems.
+
+---
+
+## Army Use Cases
+
+### Acquisition & Contracting (ACC, PEOs)
+- **Contract file intelligence** — Upload contract folders (solicitations, proposals, modifications, CDRLs) into a workspace. Ask: *"What are the key performance parameters for this system?"* or *"Summarize all contract modifications related to schedule delays."*
+- **Past performance research** — Search across past performance databases and CPARS narratives to identify contractor risk patterns
+- **FAR/DFARS compliance** — Instantly query regulatory clauses across the full FAR/DFARS corpus: *"What are the cybersecurity requirements for CUI in DFARS 252.204-7012?"*
+- **Source selection support** — Organize evaluation documents by workspace per offeror; search within or across offeror workspaces during evaluation
+
+### Logistics & Sustainment (AMC, ASC, DLA)
+- **Technical manual search** — Semantic search across TMs, ETMs, and IETMs: *"What is the torque specification for the M1A2 track tension adjuster?"* — finds the answer even when phrased differently in the manual
+- **Supply chain document analysis** — Query shipping documents, inspection reports, and maintenance logs across units
+- **Maintenance procedure lookup** — Mechanics and maintainers ask natural-language questions instead of paging through 500-page TMs
+
+### Program Management (PEO Soldier, PEO Aviation, PEO GCS, etc.)
+- **Cross-program document search** — Search across multiple program workspaces for lessons learned, test reports, and engineering change proposals
+- **Requirements traceability** — Upload CDDs, CPDs, and ICDs into tagged workspaces; query requirements across documents
+- **Milestone decision support** — Compile and search supporting documentation for DAB/ASARC reviews
+
+### Training & Doctrine (TRADOC, CAC)
+- **Doctrine search** — Semantic search across ADPs, ADRPs, FMs, and ATPs: *"What does FM 3-0 say about multi-domain operations in contested environments?"*
+- **Lessons learned** — Ingest CALL (Center for Army Lessons Learned) products and CTC rotation AARs; query across exercises and deployments
+- **Course development** — Search existing POIs and curriculum documents to avoid duplication and identify gaps
+
+### Legal (JAG, OSJA)
+- **Legal research** — Upload UCMJ references, case files, AR 15-6 investigations, and legal opinions into secure workspaces
+- **Policy compliance** — Cross-reference new policies against existing Army Regulations: *"Does this new policy conflict with AR 600-20?"*
+
+---
+
+## Why Latent Archon for the Army
+
+| Army Need | Latent Archon Capability |
+|-----------|------------------------|
+| CUI protection (DFARS 252.204-7012) | CMEK encryption, DLP scanning, FedRAMP-aligned security controls |
+| CAC/SSO integration | SAML 2.0 federation compatible with Army 365 / ICAM |
+| SharePoint document sync | Microsoft Graph integration — auto-sync from Army 365 SharePoint sites |
+| Need-to-know isolation | Workspace-level access control with RBAC and row-level security |
+| Multi-domain search | Cross-workspace queries across programs while respecting access boundaries |
+| Auditability | Immutable audit logs, SIEM-exportable, every AI response traceable to source |
+| Cloud flexibility | Deploys on AWS GovCloud (Army preference), GCP, or Azure |
+
+---
+
+## Integration with Army IT Environment
+
+- **Army 365 (Microsoft 365)** — SharePoint/OneDrive document sync via Microsoft Graph API
+- **cArmy / Army SSO** — SAML 2.0 federation for single sign-on
+- **AWS GovCloud** — Deployable in Army's preferred cloud environment (IL4/IL5 capable architecture)
+- **DISA STIG compliance** — Container-based deployment follows DISA container hardening guidelines
+
+---
+
+## Getting Started
+
+1. **Pilot program** — 30-day evaluation with a single program office or directorate
+2. **Workspace setup** — We configure workspaces mapped to your organizational structure
+3. **Document ingest** — Bulk upload or SharePoint sync from existing document repositories
+4. **User onboarding** — SSO integration + 1-hour analyst training session
+5. **Scale** — Expand to additional programs, directorates, or commands
+
+---
+
+## Contact
+
+**Latent Archon, Inc.**
+- Email: gcp-security-admins@latentarchon.com
+- Compliance & security documentation: [github.com/latentarchon/compliance](https://github.com/latentarchon/compliance)
+- CAGE Code: *(pending)*
+- SAM.gov UEI: *(pending)*
+
+---
+
+*Document ID: CAP-ARMY-001 | Version: 1.0 | Date: April 2026*
