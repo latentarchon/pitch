@@ -58,7 +58,7 @@ Latent Archon provides a secure, authorized alternative:
 |-------------|---------------|
 | **FedRAMP** | 20x KSI-aligned, OSCAL SSP generated and validated in CI, public compliance repository |
 | **Encryption** | AES-256-GCM at rest (CMEK, HSM-backed), TLS 1.3 in transit, per-tenant key isolation |
-| **Authentication** | SAML 2.0 / OIDC SSO federation, TOTP MFA enforced on all sessions, session concurrency limiting (AC-10) |
+| **Authentication** | SAML 2.0 SSO (federal: MFA enforced by agency IdP, e.g., CAC/PIV; non-federal: app TOTP MFA), session concurrency limiting (AC-10) |
 | **Session Management** | Idle timeout (25 min), absolute timeout (12 hr), concurrent session limiting (max 3) |
 | **Access Control** | RBAC with org → workspace → document hierarchy, row-level security in database |
 | **Data Protection** | DLP scanning on ingest, malware scanning, document-level permissions |

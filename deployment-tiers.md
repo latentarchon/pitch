@@ -31,9 +31,8 @@ All tiers run on Google Cloud Platform in **us-east4 (Northern Virginia)** with 
 | **Data Residency** | US-only (Assured Workloads enforced) | US-only (Assured Workloads enforced) | US-only (us-east4 org policy) |
 | **Personnel Controls** | US-person-only access (Assured Workloads) | US-person-only access (Assured Workloads) | Standard Google support |
 | **DLP Scanning** | Enforced on all documents | Enforced on all documents | Enforced on all documents |
-| **MFA** | Enforced (TOTP) | Enforced (TOTP) | Enforced (TOTP) |
+| **Authentication** | SAML 2.0 SSO (required); MFA enforced by agency IdP (e.g., CAC/PIV) | SAML 2.0 / OIDC or app TOTP MFA | SAML 2.0 / OIDC or app TOTP MFA |
 | **Audit Logs** | Immutable, SIEM-exportable | Immutable, SIEM-exportable | Immutable, SIEM-exportable |
-| **SSO** | SAML 2.0 / OIDC (required) | SAML 2.0 / OIDC (supported) | SAML 2.0 / OIDC (supported) |
 
 **Why the same security across tiers?** Government-grade security is a competitive advantage, not overhead. State governments and commercial customers get CMEK encryption, DLP scanning, and immutable audit logging by default — not as an upsell. The SLTT tier runs on the same Assured Workloads infrastructure as the federal tier, providing US-only data residency, US-person-only access controls, and access transparency — far exceeding typical StateRAMP requirements. (Note: Impact Levels are a DoD designation and do not apply to SLTT customers, but the underlying controls are identical.)
 
@@ -72,13 +71,19 @@ latentarchon.com (GCP Organization)
 - **Region** — All tiers deploy to us-east4 (Northern Virginia)
 
 ### What's Isolated (Per Tier)
-- **GCP projects** — Separate billing, IAM, networking, org policies
+- **GCP projects** — Separate billing, IAM, org policies
+- **VPC networks** — Separate VPCs per tier, no peering between tiers
+- **Compute** — Separate Cloud Run services per tier
 - **Databases** — Separate Cloud SQL instances, separate encryption keys
-- **Encryption keys** — Separate Cloud KMS keyrings, no cross-tier key access
-- **DNS / TLS** — Separate domains, separate certificates
-- **Audit logs** — Separate Cloud Logging sinks, no cross-tier log access
+- **Task processing** — Separate Cloud Tasks queues and Cloud Scheduler jobs
+- **Storage** — Separate Cloud Storage buckets
+- **Encryption keys** — Separate Cloud KMS keyrings (HSM-backed), no cross-tier key access
+- **Secrets** — Separate Secret Manager instances
+- **DNS / TLS** — Separate domains, separate certificates, separate Cloud Load Balancers
+- **Audit logs** — Separate Cloud Logging sinks and BigQuery datasets, no cross-tier log access
 - **Identity** — Separate Firebase Auth / Identity Platform projects
-- **VPC networks** — No peering between tiers
+- **Artifact Registry** — Separate container registries per tier
+- **WAF** — Separate Cloud Armor policies
 
 ---
 
@@ -111,4 +116,4 @@ The federal tier is the priority because:
 
 ---
 
-*Document ID: DEPLOY-TIERS-001 | Version: 1.2 | Date: April 2026*
+*Document ID: DEPLOY-TIERS-001 | Version: 1.3 | Date: April 2026*
