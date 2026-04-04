@@ -107,7 +107,7 @@ All tiers run in us-east4 (Northern Virginia) with CMEK encryption (FIPS 140-2 L
 | **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` |
 | **Status** | **Active** (staging deployed) | Planned | Planned |
 | **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises |
-| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads (IL4/IL5) | Standard GCP with org policies |
+| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads | Standard GCP with org policies |
 | **Certification** | FedRAMP Moderate (in progress) | StateRAMP (planned) | SOC 2 (planned) |
 | **Encryption** | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys |
 

@@ -23,19 +23,19 @@ All tiers run on Google Cloud Platform in **us-east4 (Northern Virginia)** with 
 | **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` |
 | **Status** | **Active** — staging deployed | Planned | Planned |
 | **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises, nonprofits |
-| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads (IL4/IL5) | Standard GCP with org policies |
+| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads | Standard GCP with org policies |
 | **Compliance Certification** | FedRAMP Moderate (in progress) | StateRAMP (planned) | SOC 2 Type II (planned) |
-| **Impact Level** | IL4 / IL5 | IL4 / IL5 (exceeds SLTT requirements) | N/A |
+| **Impact Level** | IL4 / IL5 (DoD designation) | N/A (same Assured Workloads controls) | N/A |
 | **GCP Region** | us-east4 (Northern Virginia) | us-east4 (Northern Virginia) | us-east4 (Northern Virginia) |
 | **Encryption** | CMEK, FIPS 140-2 L3 HSM, per-tenant keys | CMEK, FIPS 140-2 L3 HSM, per-tenant keys | CMEK, FIPS 140-2 L3 HSM, per-tenant keys |
-| **Data Residency** | US-only (Assured Workloads enforced) | US-only (Assured Workloads enforced) | US-only (us-east4) |
+| **Data Residency** | US-only (Assured Workloads enforced) | US-only (Assured Workloads enforced) | US-only (us-east4 org policy) |
 | **Personnel Controls** | US-person-only access (Assured Workloads) | US-person-only access (Assured Workloads) | Standard Google support |
 | **DLP Scanning** | Enforced on all documents | Enforced on all documents | Enforced on all documents |
 | **MFA** | Enforced (TOTP) | Enforced (TOTP) | Enforced (TOTP) |
 | **Audit Logs** | Immutable, SIEM-exportable | Immutable, SIEM-exportable | Immutable, SIEM-exportable |
 | **SSO** | SAML 2.0 / OIDC (required) | SAML 2.0 / OIDC (supported) | SAML 2.0 / OIDC (supported) |
 
-**Why the same security across tiers?** Government-grade security is a competitive advantage, not overhead. State governments and commercial customers get CMEK encryption, DLP scanning, and immutable audit logging by default — not as an upsell. The federal and SLTT tiers both run on Assured Workloads, giving state and local customers IL5-level controls that far exceed typical SLTT requirements.
+**Why the same security across tiers?** Government-grade security is a competitive advantage, not overhead. State governments and commercial customers get CMEK encryption, DLP scanning, and immutable audit logging by default — not as an upsell. The SLTT tier runs on the same Assured Workloads infrastructure as the federal tier, providing US-only data residency, US-person-only access controls, and access transparency — far exceeding typical StateRAMP requirements. (Note: Impact Levels are a DoD designation and do not apply to SLTT customers, but the underlying controls are identical.)
 
 ---
 
@@ -45,10 +45,10 @@ Each tier runs in its own GCP folder with dedicated projects. The federal tier i
 
 ```
 latentarchon.com (GCP Organization)
-├── Federal (GCP Folder — Assured Workloads IL5)
-│   ├── archon-fed-ops          — Cloud Run, Cloud SQL (PostgreSQL), Cloud Tasks
-│   ├── archon-fed-admin        — Admin panel (frontend + backend)
-│   ├── archon-fed-app          — User-facing app (frontend + backend)
+├── Federal (GCP Folder — Assured Workloads)
+│   ├── archon-fed-ops          — Backend: Cloud Run services, Cloud SQL (PostgreSQL), Cloud Tasks
+│   ├── archon-fed-admin        — Admin panel: frontend + thin API layer
+│   ├── archon-fed-app          — User-facing app: frontend + thin API layer
 │   └── archon-fed-kms          — Cloud KMS keys (HSM-backed)
 │
 ├── SLTT (GCP Folder — Assured Workloads) [PLANNED]
@@ -111,14 +111,4 @@ The federal tier is the priority because:
 
 ---
 
-## Pricing by Tier
-
-| Tier | Pricing Model | Notes |
-|------|--------------|-------|
-| **Federal** | Per-org subscription (users + storage + queries) | GSA Schedule pricing (in progress); includes all infra costs |
-| **SLTT** | Per-org subscription | Volume discounts for statewide deployments |
-| **Commercial** | Per-org subscription | Self-service onboarding (planned) |
-
----
-
-*Document ID: DEPLOY-TIERS-001 | Version: 1.1 | Date: April 2026*
+*Document ID: DEPLOY-TIERS-001 | Version: 1.2 | Date: April 2026*
