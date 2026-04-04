@@ -72,13 +72,13 @@ Latent Archon provides a secure, authorized alternative:
 
 ## Infrastructure — Google Cloud Platform
 
-Latent Archon runs entirely on Google Cloud Platform, which holds FedRAMP High authorization and offers Assured Workloads for IL4/IL5 and Dedicated Cloud for IL6.
+Latent Archon runs entirely on Google Cloud Platform in **us-east4 (Northern Virginia)**. GCP holds FedRAMP High authorization and offers Assured Workloads for IL4/IL5.
 
 | Component | GCP Service | Security |
 |-----------|------------|----------|
 | **Compute** | Cloud Run (serverless containers) | VPC-isolated, no SSH, immutable images |
 | **AI/ML** | Gemini (Vertex AI) | Data processing agreement, no model training on inputs |
-| **Vector Database** | AlloyDB (PostgreSQL) | CMEK-encrypted, Private Service Connect, automated backups with PITR |
+| **Database** | Cloud SQL (PostgreSQL) | CMEK-encrypted, Private Service Connect, automated backups with PITR |
 | **Encryption** | Cloud KMS | FIPS 140-2 Level 3 HSM, per-tenant keys, 90-day automatic rotation |
 | **Storage** | Cloud Storage | CMEK-encrypted, versioned, regional |
 | **Networking** | Cloud Armor + Cloud Load Balancing | WAF, DDoS protection, IP allowlisting |
@@ -90,32 +90,28 @@ Latent Archon runs entirely on Google Cloud Platform, which holds FedRAMP High a
 ### Why GCP?
 - **FedRAMP High** authorized — meets the bar for Moderate and High baselines
 - **Assured Workloads for IL4/IL5** — data residency, personnel controls, and access transparency built into the platform
-- **IL6 via Dedicated Cloud** — path to higher impact levels without re-architecture
+- **IL4 → IL5 with zero migration** — enable Assured Workloads on the same project; no re-deployment, no downtime
 - **Vertex AI (Gemini)** — native Google AI with no third-party data processing; covered under Google Cloud's FedRAMP authorization
 - **Private Service Connect** — database and internal services never exposed to the public internet
 
 ---
 
-## Deployment Tiers
+## Deployment Tiers (Roadmap)
 
-Latent Archon operates three isolated deployment tiers — same codebase, separate infrastructure:
+Latent Archon's architecture defines three isolated deployment tiers — same codebase, same security baseline, separate infrastructure. Only the federal tier is active today; SLTT and commercial tiers are planned.
 
-| | **Federal** | **State & Local** | **Commercial** |
+All tiers run in us-east4 (Northern Virginia) with CMEK encryption (FIPS 140-2 L3 HSM), DLP scanning, MFA, and immutable audit logs.
+
+| | **Federal** | **SLTT** | **Commercial** |
 |---|---|---|---|
 | **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` |
+| **Status** | **Active** (staging deployed) | Planned | Planned |
 | **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises |
-| **GCP Environment** | Assured Workloads (IL4/IL5) | Standard GCP + enhanced controls | Standard GCP |
-| **FedRAMP** | FedRAMP Moderate | StateRAMP/TX-RAMP if needed | SOC 2 (planned) |
-| **Encryption** | CMEK, FIPS 140-2 L3 HSM, per-tenant keys | CMEK, HSM, per-tenant keys | CMEK available |
-| **Data Residency** | US-only (Assured Workloads enforced) | US-only (org policy) | Customer's choice |
+| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads (IL4/IL5) | Standard GCP with org policies |
+| **Certification** | FedRAMP Moderate (in progress) | StateRAMP (planned) | SOC 2 (planned) |
+| **Encryption** | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys |
 
 Each tier runs in its own GCP folder with dedicated projects, databases, encryption keys, VPC networks, and audit logs. No cross-tier data access is possible. See [deployment-tiers.md](deployment-tiers.md) for full architecture details.
-
-### IL4 → IL5 Upgrade Path
-
-A key advantage of GCP over AWS and Azure: upgrading a federal customer from IL4 to IL5 requires **no migration, no downtime, and no new infrastructure**. We enable Assured Workloads IL5 controls on their existing GCP folder — same database, same endpoint, same data.
-
-On AWS, IL5 → IL6 requires migrating to a completely separate Secret Region. On Azure, it requires migrating to Government Secret — a different cloud with different endpoints. On GCP, IL4 → IL5 is a configuration change.
 
 ---
 

@@ -1,4 +1,4 @@
-# Latent Archon — Multi-Tier Deployment Architecture
+# Latent Archon — Multi-Tier Deployment Architecture (Roadmap)
 
 **Secure Isolation Across Customer Segments**
 
@@ -8,49 +8,56 @@
 
 ## Overview
 
-Latent Archon operates three deployment tiers, each running the same codebase and container images but isolated at the infrastructure level with distinct compliance postures, GCP organizational policies, and domain endpoints. This architecture enables us to serve federal agencies, state and local governments, and commercial customers from a single product while maintaining strict authorization boundary separation.
+Latent Archon's long-term architecture defines three deployment tiers, each running the same codebase and container images but isolated at the infrastructure level with distinct compliance certifications, GCP organizational policies, and domain endpoints.
+
+**Current status:** Only the federal tier (`fed.latentarchon.com`) is active, with staging deployed and FedRAMP authorization in progress. The state/local and commercial tiers are planned roadmap items — the infrastructure is identical and can be stood up quickly once there is customer demand. We are not presently certified at FedRAMP, StateRAMP, or SOC 2.
 
 ---
 
-## Tier Architecture
+## Tier Architecture (Roadmap)
 
-| | **Federal** | **State & Local** | **Commercial** |
+All tiers run on Google Cloud Platform in **us-east4 (Northern Virginia)** with the same high-security baseline: CMEK encryption with FIPS 140-2 Level 3 HSM-backed keys, DLP scanning, MFA enforcement, immutable audit logs, and row-level security. The tiers differ in compliance certification and Assured Workloads controls, not in security posture.
+
+| | **Federal** | **State & Local (SLTT)** | **Commercial** |
 |---|---|---|---|
 | **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` |
-| **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial (SLTT) | Private sector, enterprises, nonprofits |
-| **GCP Environment** | Assured Workloads (IL4/IL5) | Standard GCP with enhanced controls | Standard GCP |
-| **FedRAMP** | FedRAMP Moderate authorized | Not required (StateRAMP/TX-RAMP if needed) | Not required |
-| **Impact Level** | IL4 / IL5 (IL6 via Dedicated Cloud roadmap) | N/A | N/A |
-| **Encryption** | CMEK with FIPS 140-2 Level 3 HSM, per-tenant keys | CMEK with HSM, per-tenant keys | CMEK available, Google-managed default |
-| **Data Residency** | US-only (Assured Workloads enforced) | US-only (org policy enforced) | Customer's choice of GCP region |
-| **Personnel Controls** | US-person-only access (Assured Workloads) | US-based support | Standard Google support |
-| **Compliance Reporting** | FedRAMP ConMon, POA&M, annual assessment | StateRAMP ConMon (if applicable) | SOC 2 Type II (planned) |
+| **Status** | **Active** — staging deployed | Planned | Planned |
+| **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises, nonprofits |
+| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads (IL4/IL5) | Standard GCP with org policies |
+| **Compliance Certification** | FedRAMP Moderate (in progress) | StateRAMP (planned) | SOC 2 Type II (planned) |
+| **Impact Level** | IL4 / IL5 | IL4 / IL5 (exceeds SLTT requirements) | N/A |
+| **GCP Region** | us-east4 (Northern Virginia) | us-east4 (Northern Virginia) | us-east4 (Northern Virginia) |
+| **Encryption** | CMEK, FIPS 140-2 L3 HSM, per-tenant keys | CMEK, FIPS 140-2 L3 HSM, per-tenant keys | CMEK, FIPS 140-2 L3 HSM, per-tenant keys |
+| **Data Residency** | US-only (Assured Workloads enforced) | US-only (Assured Workloads enforced) | US-only (us-east4) |
+| **Personnel Controls** | US-person-only access (Assured Workloads) | US-person-only access (Assured Workloads) | Standard Google support |
 | **DLP Scanning** | Enforced on all documents | Enforced on all documents | Enforced on all documents |
 | **MFA** | Enforced (TOTP) | Enforced (TOTP) | Enforced (TOTP) |
-| **Audit Logs** | Immutable, SIEM-exportable, FedRAMP retention | Immutable, SIEM-exportable | Immutable, exportable |
+| **Audit Logs** | Immutable, SIEM-exportable | Immutable, SIEM-exportable | Immutable, SIEM-exportable |
 | **SSO** | SAML 2.0 / OIDC (required) | SAML 2.0 / OIDC (supported) | SAML 2.0 / OIDC (supported) |
+
+**Why the same security across tiers?** Government-grade security is a competitive advantage, not overhead. State governments and commercial customers get CMEK encryption, DLP scanning, and immutable audit logging by default — not as an upsell. The federal and SLTT tiers both run on Assured Workloads, giving state and local customers IL5-level controls that far exceed typical SLTT requirements.
 
 ---
 
 ## Infrastructure Isolation
 
-Each tier runs in its own GCP folder with dedicated:
+Each tier runs in its own GCP folder with dedicated projects. The federal tier is deployed today; SLTT and commercial folders follow the same pattern.
 
 ```
 latentarchon.com (GCP Organization)
 ├── Federal (GCP Folder — Assured Workloads IL5)
-│   ├── archon-fed-ops          — Cloud Run, AlloyDB, Cloud Tasks
-│   ├── archon-fed-admin        — Admin panel backend + frontend
-│   ├── archon-fed-app          — User-facing frontend
+│   ├── archon-fed-ops          — Cloud Run, Cloud SQL (PostgreSQL), Cloud Tasks
+│   ├── archon-fed-admin        — Admin panel (frontend + backend)
+│   ├── archon-fed-app          — User-facing app (frontend + backend)
 │   └── archon-fed-kms          — Cloud KMS keys (HSM-backed)
 │
-├── State & Local (GCP Folder — Standard + enhanced org policies)
+├── SLTT (GCP Folder — Assured Workloads) [PLANNED]
 │   ├── archon-gov-ops
 │   ├── archon-gov-admin
 │   ├── archon-gov-app
 │   └── archon-gov-kms
 │
-└── Commercial (GCP Folder — Standard)
+└── Commercial (GCP Folder) [PLANNED]
     ├── archon-cloud-ops
     ├── archon-cloud-admin
     ├── archon-cloud-app
@@ -61,11 +68,12 @@ latentarchon.com (GCP Organization)
 - **Codebase** — Single monorepo, same Go backend, same React frontend
 - **Container images** — Built once in CI, promoted across tiers
 - **Database schema** — Same migrations, same SQLC queries
-- **Security controls** — DLP, malware scanning, audit logging, RBAC, row-level security
+- **Security controls** — CMEK encryption, DLP scanning, malware scanning, audit logging, RBAC, row-level security
+- **Region** — All tiers deploy to us-east4 (Northern Virginia)
 
 ### What's Isolated (Per Tier)
 - **GCP projects** — Separate billing, IAM, networking, org policies
-- **Databases** — Separate AlloyDB clusters, separate encryption keys
+- **Databases** — Separate Cloud SQL instances, separate encryption keys
 - **Encryption keys** — Separate Cloud KMS keyrings, no cross-tier key access
 - **DNS / TLS** — Separate domains, separate certificates
 - **Audit logs** — Separate Cloud Logging sinks, no cross-tier log access
@@ -76,25 +84,15 @@ latentarchon.com (GCP Organization)
 
 ## The IL4 → IL5 Upgrade Path
 
-One of the most significant advantages of GCP over AWS and Azure for DoD customers:
-
-### The Problem with Other Clouds
+A key advantage of GCP over AWS and Azure for DoD customers:
 
 | Cloud | IL4 → IL5 | What It Means |
 |-------|-----------|---------------|
-| **AWS** | Same GovCloud region, but additional dedicated tenancy configs; IL6 requires migration to Secret Region | Potential re-deployment for IL6; different API endpoints, different service availability |
-| **Azure** | Azure Government → Azure Government with isolation configs; IL6 requires Government Secret | Different environment, different endpoints, different Azure AD tenant |
+| **AWS** | Same GovCloud region, but additional dedicated tenancy configurations required | Re-configuration, potential service disruption |
+| **Azure** | Azure Government → additional isolation configs | Different configuration, potential endpoint changes |
 | **GCP** | **Enable Assured Workloads on the same project** | No migration, no downtime, no new infrastructure |
 
-### How It Works on GCP
-
-1. Customer starts on `fed.latentarchon.com` at IL4
-2. Agency's authorization boundary expands to require IL5
-3. We enable Assured Workloads IL5 controls on their GCP folder
-4. GCP enforces: US-only data residency, US-person-only access, Access Transparency logging
-5. **Same database, same endpoint, same data, zero downtime**
-
-This is a concrete selling point for DoD customers evaluating competing platforms — especially those who've experienced the pain of migrating between AWS commercial and GovCloud, or between Azure Government and Azure Government Secret.
+Upgrading from IL4 to IL5 on GCP is a configuration change — same database, same endpoint, same data, zero downtime. This is a concrete selling point for DoD customers who've experienced the pain of cloud environment migrations.
 
 ---
 
@@ -103,13 +101,13 @@ This is a concrete selling point for DoD customers evaluating competing platform
 | Phase | Tier | Status | Timeline |
 |-------|------|--------|----------|
 | **1** | Federal (`fed.latentarchon.com`) | Active — staging deployed, FedRAMP in progress | Now |
-| **2** | Commercial (`cloud.latentarchon.com`) | Planned — same codebase, lighter compliance | Post-FedRAMP authorization |
-| **3** | State & Local (`gov.latentarchon.com`) | Planned — driven by SLTT customer demand | On demand |
+| **2** | Commercial (`cloud.latentarchon.com`) | Planned — same codebase, same security baseline | Post-FedRAMP authorization |
+| **3** | SLTT (`gov.latentarchon.com`) | Planned — driven by customer demand | On demand |
 
 The federal tier is the priority because:
 - FedRAMP authorization is the hardest credential to earn and the most valuable moat
 - Federal contracts are larger and longer-term
-- Commercial and SLTT tiers are trivial to stand up once the federal tier is running — it's the same code with fewer restrictions
+- Commercial and SLTT tiers are trivial to stand up once the federal tier is running — same code, same security, new GCP folder
 
 ---
 
@@ -118,9 +116,9 @@ The federal tier is the priority because:
 | Tier | Pricing Model | Notes |
 |------|--------------|-------|
 | **Federal** | Per-org subscription (users + storage + queries) | GSA Schedule pricing (in progress); includes all infra costs |
-| **State & Local** | Per-org subscription | Volume discounts for statewide deployments |
-| **Commercial** | Per-org subscription | Self-service onboarding (planned); lower price point than federal |
+| **SLTT** | Per-org subscription | Volume discounts for statewide deployments |
+| **Commercial** | Per-org subscription | Self-service onboarding (planned) |
 
 ---
 
-*Document ID: DEPLOY-TIERS-001 | Version: 1.0 | Date: April 2026*
+*Document ID: DEPLOY-TIERS-001 | Version: 1.1 | Date: April 2026*
