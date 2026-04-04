@@ -14,6 +14,7 @@ I'm writing to express Latent Archon's interest in participating in the FedRAMP 
 **Why we're ready:** We've built our platform with FedRAMP 20x KSIs as the design target from day one, not as a retrofit. Our compliance posture includes:
 
 - **Public compliance repository** with automated OSCAL SSP generation and CI validation: [github.com/latentarchon/compliance](https://github.com/latentarchon/compliance)
+- **Public capability briefs** with deployment architecture, security posture, and use cases: [github.com/latentarchon/pitch](https://github.com/latentarchon/pitch)
 - **All 11 KSI themes addressed** with automated, persistent evidence collection
 - **Monthly automated red team exercises** (44 attack scenarios across auth bypass, privilege escalation, and data exfiltration — MITRE ATT&CK mapped)
 - **Monthly automated contingency plan testing** (database backup/PITR, storage versioning, container health, KMS key availability)
