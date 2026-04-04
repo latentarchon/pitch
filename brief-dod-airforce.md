@@ -65,8 +65,11 @@ The Air Force and Space Force manage vast repositories of technical orders, acqu
 - **AF365 (Microsoft 365)** — SharePoint document sync via Microsoft Graph API with delta-based incremental updates, SAML SSO
 - **CAC authentication** — SAML 2.0 federation with Air Force ICAM
 - **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and personnel controls
+- **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **Platform One / Cloud One** — Container-based architecture compatible with AF PaaS environments
 - **DISA STIG compliance** — Follows DoD container hardening guidelines and NIST 800-171
+
+Federal customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated environment separate from state/local and commercial tiers. See [deployment-tiers.md](deployment-tiers.md) for architecture details.
 
 ---
 

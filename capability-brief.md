@@ -96,12 +96,26 @@ Latent Archon runs entirely on Google Cloud Platform, which holds FedRAMP High a
 
 ---
 
-## Deployment Options
+## Deployment Tiers
 
-- **SaaS (FedRAMP Authorized)** — Latent Archon hosts and operates on GCP; agency connects via SSO
-- **Dedicated tenant** — Isolated GCP project in agency's preferred region with dedicated CMEK keys
-- **Assured Workloads tenant** — IL5-compliant GCP environment for DoD and IC customers
-- **On-premises / air-gapped** — Container-based deployment for classified or disconnected environments (roadmap)
+Latent Archon operates three isolated deployment tiers — same codebase, separate infrastructure:
+
+| | **Federal** | **State & Local** | **Commercial** |
+|---|---|---|---|
+| **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` |
+| **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises |
+| **GCP Environment** | Assured Workloads (IL4/IL5) | Standard GCP + enhanced controls | Standard GCP |
+| **FedRAMP** | FedRAMP Moderate | StateRAMP/TX-RAMP if needed | SOC 2 (planned) |
+| **Encryption** | CMEK, FIPS 140-2 L3 HSM, per-tenant keys | CMEK, HSM, per-tenant keys | CMEK available |
+| **Data Residency** | US-only (Assured Workloads enforced) | US-only (org policy) | Customer's choice |
+
+Each tier runs in its own GCP folder with dedicated projects, databases, encryption keys, VPC networks, and audit logs. No cross-tier data access is possible. See [deployment-tiers.md](deployment-tiers.md) for full architecture details.
+
+### IL4 → IL5 Upgrade Path
+
+A key advantage of GCP over AWS and Azure: upgrading a federal customer from IL4 to IL5 requires **no migration, no downtime, and no new infrastructure**. We enable Assured Workloads IL5 controls on their existing GCP folder — same database, same endpoint, same data.
+
+On AWS, IL5 → IL6 requires migrating to a completely separate Secret Region. On Azure, it requires migrating to Government Secret — a different cloud with different endpoints. On GCP, IL4 → IL5 is a configuration change.
 
 ---
 
@@ -150,4 +164,4 @@ All infrastructure costs are included — no separate cloud bills, no hidden AI 
 
 ---
 
-*Document ID: CAP-BRIEF-001 | Version: 1.0 | Date: April 2026*
+*Document ID: CAP-BRIEF-001 | Version: 1.1 | Date: April 2026*

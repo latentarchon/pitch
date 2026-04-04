@@ -75,8 +75,11 @@ Intelligence Community (IC) agencies and their support organizations produce and
 - **Microsoft 365 / SharePoint** — Auto-sync from SharePoint sites via Microsoft Graph API (delta-based incremental updates)
 - **SAML 2.0 / OIDC** — Federation with any IC-standard identity provider
 - **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and personnel controls; IL6 path via Dedicated Cloud
+- **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **SIEM export** — Audit logs exportable to Splunk, Elastic, or agency SIEM platforms
 - **API access** — Connect-RPC API for integration with analytical tools and workflows
+
+Federal/IC customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated environment separate from state/local and commercial tiers. See [deployment-tiers.md](deployment-tiers.md) for architecture details.
 
 ---
 

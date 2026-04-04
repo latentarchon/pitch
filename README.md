@@ -1,6 +1,6 @@
 # Latent Archon — Government Capability Briefs
 
-Sales and outreach materials for federal agencies and DoD service branches.
+Sales and outreach materials for federal agencies, DoD service branches, and commercial customers.
 
 ## Contents
 
@@ -12,6 +12,7 @@ Sales and outreach materials for federal agencies and DoD service branches.
 | [brief-dod-airforce.md](brief-dod-airforce.md) | U.S. Air Force / Space Force | Tailored for AFLCMC, SpRCO, and space acquisition |
 | [brief-intel.md](brief-intel.md) | Intelligence Community | Tailored for IC agencies working with CUI/FOUO analytical products |
 | [brief-civilian.md](brief-civilian.md) | Civilian agencies (GSA, VA, HHS, etc.) | Tailored for civilian use cases — grants, benefits, regulatory docs |
+| [deployment-tiers.md](deployment-tiers.md) | Technical / all audiences | Multi-tier architecture: fed, gov, cloud — isolation, IL levels, upgrade path |
 | [fedramp-outreach-email.md](fedramp-outreach-email.md) | FedRAMP PMO | Draft email to 20x@fedramp.gov expressing readiness for Phase 2/3 |
 
 ## Usage

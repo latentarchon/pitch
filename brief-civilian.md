@@ -64,6 +64,8 @@ Civilian federal agencies manage sprawling document ecosystems — regulations, 
 | Cloud platform | Google Cloud Platform (FedRAMP High authorized); Assured Workloads for IL4/IL5 available |
 | Section 508 compliance | Web-based interface compatible with assistive technologies |
 
+Federal civilian agencies access Latent Archon at `fed.latentarchon.com`. State and local government customers use a separate isolated environment at `gov.latentarchon.com`. See [deployment-tiers.md](deployment-tiers.md) for architecture details.
+
 ---
 
 ## Addressing Common Civilian Agency Concerns
