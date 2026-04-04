@@ -62,7 +62,7 @@ Latent Archon provides a secure, authorized alternative:
 | **Session Management** | Idle timeout (25 min), absolute timeout (12 hr), concurrent session limiting (max 3) |
 | **Access Control** | RBAC with org → workspace → document hierarchy, row-level security in database |
 | **Data Protection** | DLP scanning on ingest, malware scanning, document-level permissions |
-| **Audit** | Immutable audit logs for all data access, exportable to SIEM, Cloud Audit Logs integration |
+| **Audit** | Immutable audit logs for all data access, available for export to agency SIEM upon request, Cloud Audit Logs integration |
 | **Infrastructure** | Google Cloud Platform with Assured Workloads (IL4/IL5), VPC-isolated, Private Service Connect, no public endpoints except load balancer |
 | **Supply Chain** | SBOM generation, dependency scanning (Dependabot + Snyk), container image signing, Artifact Registry with CMEK |
 | **Incident Response** | Automated monthly red team exercises (44 attack scenarios), contingency plan testing, FedRAMP-aligned ICP |
@@ -84,7 +84,7 @@ Latent Archon runs entirely on Google Cloud Platform in **us-east4 (Northern Vir
 | **Networking** | Cloud Armor + Cloud Load Balancing | WAF, DDoS protection, IP allowlisting |
 | **Secrets** | Secret Manager | CMEK-encrypted, IAM-gated, audit-logged |
 | **Task Queue** | Cloud Tasks | CMEK-encrypted, async document processing pipeline |
-| **Logging** | Cloud Logging + BigQuery | CMEK-encrypted, immutable, SIEM-exportable |
+| **Logging** | Cloud Logging + BigQuery | CMEK-encrypted, immutable, available for agency SIEM export |
 | **Container Registry** | Artifact Registry | CMEK-encrypted, vulnerability scanning, image signing |
 
 ### Why GCP?

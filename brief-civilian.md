@@ -60,7 +60,7 @@ Civilian federal agencies manage sprawling document ecosystems — regulations, 
 | SharePoint / M365 integration | Microsoft Graph API — auto-sync from agency SharePoint sites |
 | Program/office isolation | Workspace-level access control — each office, division, or program gets its own sandbox |
 | Cross-office search | Selective cross-workspace queries — staff choose which collections to include |
-| Audit and accountability | Immutable logs, every response cites source documents, SIEM-exportable |
+| Audit and accountability | Immutable logs, every response cites source documents, audit data available for agency SIEM export |
 | Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia); GCP holds FedRAMP High authorization |
 | Section 508 compliance | Web-based interface compatible with assistive technologies |
 

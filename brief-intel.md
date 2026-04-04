@@ -76,7 +76,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 - **SAML 2.0 / OIDC** — Federation with any IC-standard identity provider
 - **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and US-person-only personnel controls; us-east4 (Northern Virginia)
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
-- **SIEM export** — Audit logs exportable to Splunk, Elastic, or agency SIEM platforms
+- **SIEM export** — Audit data available for export to agency SIEM platforms (Splunk, Elastic, etc.) upon request
 - **API access** — Connect-RPC API for integration with analytical tools and workflows
 
 Federal/IC customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated GCP environment with Assured Workloads, separate from planned SLTT and commercial tiers. See [deployment-tiers.md](deployment-tiers.md) for architecture details.

@@ -32,7 +32,7 @@ All tiers run on Google Cloud Platform in **us-east4 (Northern Virginia)** with 
 | **Personnel Controls** | US-person-only access (Assured Workloads) | US-person-only access (Assured Workloads) | Standard Google support |
 | **DLP Scanning** | Enforced on all documents | Enforced on all documents | Enforced on all documents |
 | **Authentication** | SAML 2.0 SSO (required); MFA enforced by agency IdP (e.g., CAC/PIV) | SAML 2.0 / OIDC or app TOTP MFA | SAML 2.0 / OIDC or app TOTP MFA |
-| **Audit Logs** | Immutable, SIEM-exportable | Immutable, SIEM-exportable | Immutable, SIEM-exportable |
+| **Audit Logs** | Immutable, available for agency SIEM export | Immutable, available for agency SIEM export | Immutable, available for SIEM export |
 
 **Why the same security across tiers?** Government-grade security is a competitive advantage, not overhead. State governments and commercial customers get CMEK encryption, DLP scanning, and immutable audit logging by default — not as an upsell. The SLTT tier runs on the same Assured Workloads infrastructure as the federal tier, providing US-only data residency, US-person-only access controls, and access transparency — far exceeding typical StateRAMP requirements. (Note: Impact Levels are a DoD designation and do not apply to SLTT customers, but the underlying controls are identical.)
 

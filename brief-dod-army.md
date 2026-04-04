@@ -50,7 +50,7 @@ The U.S. Army generates and consumes an enormous volume of documents across acqu
 | SharePoint document sync | Microsoft Graph integration — auto-sync from Army 365 SharePoint sites |
 | Need-to-know isolation | Workspace-level access control with RBAC and row-level security |
 | Multi-domain search | Cross-workspace queries across programs while respecting access boundaries |
-| Auditability | Immutable audit logs, SIEM-exportable, every AI response traceable to source |
+| Auditability | Immutable audit logs, audit data available for agency SIEM export, every AI response traceable to source |
 | Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
 
 ---
