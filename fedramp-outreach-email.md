@@ -18,12 +18,12 @@ I'm writing to express Latent Archon's interest in participating in the FedRAMP 
 - **Monthly automated red team exercises** (44 attack scenarios across auth bypass, privilege escalation, and data exfiltration — MITRE ATT&CK mapped)
 - **Monthly automated contingency plan testing** (database backup/PITR, storage versioning, container health, KMS key availability)
 - **Significant Change Notification (SCN) classification** enforced as a required CI check on every pull request across all repositories
-- **Multi-cloud architecture** (GCP, AWS, Azure) with per-tenant CMEK encryption (FIPS 140-2 Level 3 HSM), DLP scanning, and row-level security
+- **Google Cloud Platform** with per-tenant CMEK encryption (FIPS 140-2 Level 3 HSM), DLP scanning, and row-level security — leveraging GCP's FedRAMP High authorization and Assured Workloads for IL4/IL5
 - **SAML/OIDC SSO federation**, MFA enforcement, session concurrency limiting (AC-10), and idle/absolute session timeouts (AC-12)
 
 **Target authorization level:** FedRAMP Moderate
 
-**Cloud deployment:** Google Cloud Platform (primary), with AWS and Azure parity
+**Cloud deployment:** Google Cloud Platform (Assured Workloads for IL4/IL5)
 
 **Current customers:** Pre-revenue; seeking agency sponsor to complete authorization
 

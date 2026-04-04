@@ -56,17 +56,33 @@ The Air Force and Space Force manage vast repositories of technical orders, acqu
 | Program/unit isolation | Workspace-level access control — each SPO, squadron, or wing gets its own sandbox |
 | Cross-system search | Query across weapon systems, programs, or commands with tag-based filtering |
 | Auditability | Immutable logs, every AI response traceable to source document |
-| Cloud flexibility | AWS GovCloud, GCP, or Azure (Platform One / Cloud One compatible architecture) |
+| Cloud platform | Google Cloud Platform with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
 
 ---
 
 ## Integration with AF/SF IT Environment
 
-- **AF365 (Microsoft 365)** — SharePoint document sync via Microsoft Graph API, SAML SSO
+- **AF365 (Microsoft 365)** — SharePoint document sync via Microsoft Graph API with delta-based incremental updates, SAML SSO
 - **CAC authentication** — SAML 2.0 federation with Air Force ICAM
+- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and personnel controls
 - **Platform One / Cloud One** — Container-based architecture compatible with AF PaaS environments
-- **AWS GovCloud / Azure** — Deployable in AF/SF preferred clouds (IL4/IL5 architecture ready)
 - **DISA STIG compliance** — Follows DoD container hardening guidelines and NIST 800-171
+
+---
+
+## Scenario: Weapon System Sustainment Program Office
+
+**Situation:** A program manager at AFLCMC needs to prepare for an ACAT II milestone review. The supporting documentation spans 8 years of contract files, test reports, engineering change proposals, and CDRLs across 3 prime contractors — tens of thousands of pages.
+
+**Before Latent Archon:** A team of 4 analysts spends 2 weeks manually pulling documents from SharePoint, reading through files, and compiling a briefing package. Key documents are missed because they're filed under a different contract or program name.
+
+**With Latent Archon:**
+1. All program documents are already in workspaces organized by contractor and document type, auto-synced from AF365 SharePoint
+2. The PM asks: *“Summarize all test failures and corrective actions from OT&E reports across all three contractors for this system. Include the current status of each corrective action.”*
+3. Latent Archon searches across all three contractor workspaces, finds 23 relevant test findings, and generates a structured summary with citations to each OT&E report
+4. Follow-up: *“Which of these corrective actions are still open? Cross-reference with the latest CDRLs to confirm.”*
+
+**Result:** 2 weeks of manual compilation → 1 hour of AI-assisted analysis. Better coverage, fewer missed documents.
 
 ---
 
@@ -90,4 +106,4 @@ The Air Force and Space Force manage vast repositories of technical orders, acqu
 
 ---
 
-*Document ID: CAP-USAF-001 | Version: 1.0 | Date: April 2026*
+*Document ID: CAP-USAF-001 | Version: 1.1 | Date: April 2026*

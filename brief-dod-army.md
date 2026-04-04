@@ -51,16 +51,33 @@ The U.S. Army generates and consumes an enormous volume of documents across acqu
 | Need-to-know isolation | Workspace-level access control with RBAC and row-level security |
 | Multi-domain search | Cross-workspace queries across programs while respecting access boundaries |
 | Auditability | Immutable audit logs, SIEM-exportable, every AI response traceable to source |
-| Cloud flexibility | Deploys on AWS GovCloud (Army preference), GCP, or Azure |
+| Cloud platform | Google Cloud Platform with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
 
 ---
 
 ## Integration with Army IT Environment
 
-- **Army 365 (Microsoft 365)** — SharePoint/OneDrive document sync via Microsoft Graph API
+- **Army 365 (Microsoft 365)** — SharePoint/OneDrive document sync via Microsoft Graph API with delta-based incremental updates
 - **cArmy / Army SSO** — SAML 2.0 federation for single sign-on
-- **AWS GovCloud** — Deployable in Army's preferred cloud environment (IL4/IL5 capable architecture)
+- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and personnel controls
 - **DISA STIG compliance** — Container-based deployment follows DISA container hardening guidelines
+- **NIST 800-171 / CMMC alignment** — CUI controls mapped to CMMC Level 2 requirements
+
+---
+
+## Scenario: Logistics Command Technical Manual Search
+
+**Situation:** A maintenance NCO at an AMC depot needs to find the torque specification for a specific component across multiple equipment TMs. The answer exists somewhere in 12,000+ pages of technical manuals for the vehicle family.
+
+**Before Latent Archon:** The NCO spends 45 minutes paging through PDFs, searching for keywords that may not match the document's terminology. Sometimes they give up and call the OEM tech rep.
+
+**With Latent Archon:**
+1. Opens the vehicle family workspace (pre-loaded with all TMs for the platform)
+2. Asks: *“What is the torque specification for the M1A2 SEPv3 track tension adjuster bolt?”*
+3. Gets the answer in 3 seconds with a citation to the exact TM, page, and paragraph
+4. Clicks the citation to view the original document page in context
+
+**Result:** 45 minutes → 30 seconds. Multiply across thousands of maintainers.
 
 ---
 
@@ -84,4 +101,4 @@ The U.S. Army generates and consumes an enormous volume of documents across acqu
 
 ---
 
-*Document ID: CAP-ARMY-001 | Version: 1.0 | Date: April 2026*
+*Document ID: CAP-ARMY-001 | Version: 1.1 | Date: April 2026*

@@ -52,17 +52,33 @@ Naval forces operate across globally distributed commands — from NAVAIR and NA
 | Ship/squadron/unit isolation | Workspace-level access control — each unit or program gets its own sandbox |
 | Cross-platform search | Query across ship classes, aircraft platforms, or programs with tag-based filtering |
 | Audit trail | Immutable logs, every AI response traceable to source document and page |
-| Cloud flexibility | AWS GovCloud (Navy IL4/5), GCP, or Azure |
+| Cloud platform | Google Cloud Platform with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
 
 ---
 
 ## Integration with Navy IT Environment
 
-- **Flank Speed (Microsoft 365)** — SharePoint document sync via Microsoft Graph API, SAML SSO
+- **Flank Speed (Microsoft 365)** — SharePoint document sync via Microsoft Graph API with delta-based incremental updates, SAML SSO
 - **Navy CAC authentication** — SAML 2.0 federation with Navy ICAM / NMCI identity providers
-- **AWS GovCloud** — Deployable in Navy's preferred cloud (IL4/IL5 architecture ready)
+- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and personnel controls
 - **DISA STIG compliance** — Containerized deployment follows DoD container hardening guidelines
 - **NIST 800-171 / CMMC alignment** — CUI controls mapped to CMMC Level 2 requirements
+
+---
+
+## Scenario: Fleet Readiness Center Aircraft Maintenance
+
+**Situation:** An aviation mechanic at FRC East needs to determine the NDI interval for a specific structural component on the F/A-18E. The answer is buried across multiple NAMPs, MIMs, and SRMs — thousands of pages of maintenance publications that use different terminology for the same inspection.
+
+**Before Latent Archon:** The mechanic searches PDF keywords for 20+ minutes, cross-references 3 different publications, and may still miss the most current NAVAIR technical directive that updated the interval.
+
+**With Latent Archon:**
+1. Opens the F/A-18E maintenance workspace (pre-loaded with all NAMPs, MIMs, SRMs, and active TDs)
+2. Asks: *“What is the current NDI interval for the wing root fitting on the F/A-18E? Include any recent technical directives that modified the original interval.”*
+3. Gets a cited answer in seconds — including the original SRM reference AND the recent TD that changed it
+4. Clicks citations to verify against the original source documents
+
+**Result:** 20+ minutes of cross-referencing → instant answer with full traceability. Fewer maintenance errors from missed publications.
 
 ---
 
@@ -86,4 +102,4 @@ Naval forces operate across globally distributed commands — from NAVAIR and NA
 
 ---
 
-*Document ID: CAP-NAVY-001 | Version: 1.0 | Date: April 2026*
+*Document ID: CAP-NAVY-001 | Version: 1.1 | Date: April 2026*

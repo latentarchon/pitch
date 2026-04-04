@@ -63,32 +63,67 @@ Latent Archon provides a secure, authorized alternative:
 | **Access Control** | RBAC with org → workspace → document hierarchy, row-level security in database |
 | **Data Protection** | DLP scanning on ingest, malware scanning, document-level permissions |
 | **Audit** | Immutable audit logs for all data access, exportable to SIEM, Cloud Audit Logs integration |
-| **Infrastructure** | Multi-cloud (GCP, AWS, Azure), VPC-isolated, Private Service Connect, no public endpoints except load balancer |
+| **Infrastructure** | Google Cloud Platform with Assured Workloads (IL4/IL5), VPC-isolated, Private Service Connect, no public endpoints except load balancer |
 | **Supply Chain** | SBOM generation, dependency scanning (Dependabot + Snyk), container image signing, Artifact Registry with CMEK |
 | **Incident Response** | Automated monthly red team exercises (44 attack scenarios), contingency plan testing, FedRAMP-aligned ICP |
 | **Continuous Monitoring** | Automated KSI evidence collection, SCN classification on every PR, Cloud Armor WAF |
 
 ---
 
-## Multi-Cloud Deployment
+## Infrastructure — Google Cloud Platform
 
-Latent Archon deploys on the cloud your agency already uses:
+Latent Archon runs entirely on Google Cloud Platform, which holds FedRAMP High authorization and offers Assured Workloads for IL4/IL5 and Dedicated Cloud for IL6.
 
-| Cloud | Compute | AI/ML | Vector Store | Encryption |
-|-------|---------|-------|-------------|------------|
-| **GCP** | Cloud Run | Gemini | AlloyDB | Cloud KMS (HSM) |
-| **AWS** | ECS Fargate | Bedrock (Titan/Claude) | Aurora pgvector | KMS |
-| **Azure** | Container Apps | Azure OpenAI | Azure PostgreSQL | Key Vault (HSM) |
+| Component | GCP Service | Security |
+|-----------|------------|----------|
+| **Compute** | Cloud Run (serverless containers) | VPC-isolated, no SSH, immutable images |
+| **AI/ML** | Gemini (Vertex AI) | Data processing agreement, no model training on inputs |
+| **Vector Database** | AlloyDB (PostgreSQL) | CMEK-encrypted, Private Service Connect, automated backups with PITR |
+| **Encryption** | Cloud KMS | FIPS 140-2 Level 3 HSM, per-tenant keys, 90-day automatic rotation |
+| **Storage** | Cloud Storage | CMEK-encrypted, versioned, regional |
+| **Networking** | Cloud Armor + Cloud Load Balancing | WAF, DDoS protection, IP allowlisting |
+| **Secrets** | Secret Manager | CMEK-encrypted, IAM-gated, audit-logged |
+| **Task Queue** | Cloud Tasks | CMEK-encrypted, async document processing pipeline |
+| **Logging** | Cloud Logging + BigQuery | CMEK-encrypted, immutable, SIEM-exportable |
+| **Container Registry** | Artifact Registry | CMEK-encrypted, vulnerability scanning, image signing |
 
-All deployments use the same codebase, same security controls, same compliance posture.
+### Why GCP?
+- **FedRAMP High** authorized — meets the bar for Moderate and High baselines
+- **Assured Workloads for IL4/IL5** — data residency, personnel controls, and access transparency built into the platform
+- **IL6 via Dedicated Cloud** — path to higher impact levels without re-architecture
+- **Vertex AI (Gemini)** — native Google AI with no third-party data processing; covered under Google Cloud's FedRAMP authorization
+- **Private Service Connect** — database and internal services never exposed to the public internet
 
 ---
 
 ## Deployment Options
 
-- **SaaS (FedRAMP Authorized)** — Latent Archon hosts and operates; agency connects via SSO
-- **Dedicated tenant** — Isolated infrastructure in agency's preferred cloud region
+- **SaaS (FedRAMP Authorized)** — Latent Archon hosts and operates on GCP; agency connects via SSO
+- **Dedicated tenant** — Isolated GCP project in agency's preferred region with dedicated CMEK keys
+- **Assured Workloads tenant** — IL5-compliant GCP environment for DoD and IC customers
 - **On-premises / air-gapped** — Container-based deployment for classified or disconnected environments (roadmap)
+
+---
+
+## How It Works — A Concrete Example
+
+**Scenario:** An Army PEO contracting officer needs to review 3 years of contract modifications across 12 programs to prepare a briefing on cost growth trends.
+
+1. **Upload** — The contracting team has already uploaded contract folders into program-specific workspaces. New modifications sync automatically from SharePoint overnight via Microsoft Graph integration.
+
+2. **Search** — The officer opens Latent Archon, selects all 12 program workspaces, and asks:
+   > *"Summarize all contract modifications that increased cost by more than 10%. Group by program and identify the stated justification for each increase."*
+
+3. **Response** — Latent Archon searches across all documents semantically, finds 47 relevant modifications, and generates a structured summary:
+   - Each entry cites the specific modification number, page, and relevant passage
+   - Results are grouped by program as requested
+   - A synthesis paragraph identifies the three most common justification categories
+
+4. **Verify** — The officer clicks any citation to view the original document passage in context. Every answer is traceable — no hallucination, no unsourced claims.
+
+5. **Refine** — The officer follows up: *"Which of these modifications were sole-source? What was the J&A rationale?"* — Latent Archon narrows the search to the same document set and returns cited answers.
+
+**Time saved:** What previously took 2-3 days of manual document review takes 15 minutes.
 
 ---
 
@@ -100,6 +135,8 @@ Per-organization subscription based on:
 - AI query volume
 
 Volume discounts for enterprise-wide and multi-agency deployments. GSA Schedule pricing available (in progress).
+
+All infrastructure costs are included — no separate cloud bills, no hidden AI query fees.
 
 ---
 

@@ -61,7 +61,7 @@ Civilian federal agencies manage sprawling document ecosystems — regulations, 
 | Program/office isolation | Workspace-level access control — each office, division, or program gets its own sandbox |
 | Cross-office search | Selective cross-workspace queries — staff choose which collections to include |
 | Audit and accountability | Immutable logs, every response cites source documents, SIEM-exportable |
-| Cloud flexibility | GCP, AWS, or Azure — deploy where your agency already operates |
+| Cloud platform | Google Cloud Platform (FedRAMP High authorized); Assured Workloads for IL4/IL5 available |
 | Section 508 compliance | Web-based interface compatible with assistive technologies |
 
 ---
@@ -78,6 +78,22 @@ SharePoint search is keyword-based. Latent Archon uses semantic search — it un
 
 ### "Can we control who sees what?"
 Yes. Workspaces enforce need-to-know. An HR workspace with sensitive personnel data is invisible to someone who only has access to the policy workspace. Row-level security is enforced at the database level, not just the application.
+
+---
+
+## Scenario: VA Benefits Adjudication
+
+**Situation:** A Veterans Benefits Administration (VBA) rating specialist needs to evaluate a disability claim involving 14 years of military service records, medical records from 3 VA facilities, and private medical opinions — over 2,000 pages of evidence.
+
+**Before Latent Archon:** The specialist manually reviews each document, takes notes, and cross-references service records against medical evidence. A complex claim takes 4-6 hours to fully review, and critical evidence buried on page 847 of a medical record may be missed.
+
+**With Latent Archon:**
+1. All claim evidence is uploaded into a case workspace (one workspace per claim, access restricted to the assigned rating team)
+2. The specialist asks: *"What medical evidence supports a connection between the veteran's diagnosed condition and their in-service injury documented in the STRs? Include dates, providers, and specific findings."*
+3. Latent Archon searches across all 2,000+ pages, identifies 8 relevant medical entries and 3 service treatment records, and presents them with full citations
+4. Follow-up: *"Are there any IMOs or nexus opinions in the file? What did each conclude?"*
+
+**Result:** 4-6 hours of manual review → 45 minutes. More thorough evidence review, fewer remands for missed evidence.
 
 ---
 
@@ -101,4 +117,4 @@ Yes. Workspaces enforce need-to-know. An HR workspace with sensitive personnel d
 
 ---
 
-*Document ID: CAP-CIV-001 | Version: 1.0 | Date: April 2026*
+*Document ID: CAP-CIV-001 | Version: 1.1 | Date: April 2026*

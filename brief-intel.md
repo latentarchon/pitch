@@ -55,7 +55,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 | Source traceability | Every AI response cites the specific document and passage — fully auditable |
 | No model training on data | Zero fine-tuning on government data — models used only at query time for retrieval |
 | Data residency | Deploy in specific cloud region; per-tenant encryption keys; data never leaves boundary |
-| Cloud flexibility | AWS GovCloud (IC preference), GCP, or Azure |
+| Cloud platform | Google Cloud Platform with Assured Workloads (IL4/IL5); FedRAMP High authorized; IL6 path via Dedicated Cloud |
 
 ---
 
@@ -74,9 +74,25 @@ Intelligence Community (IC) agencies and their support organizations produce and
 
 - **Microsoft 365 / SharePoint** — Auto-sync from SharePoint sites via Microsoft Graph API (delta-based incremental updates)
 - **SAML 2.0 / OIDC** — Federation with any IC-standard identity provider
-- **AWS GovCloud** — Primary deployment target for IC workloads (IL4/IL5 architecture)
+- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and personnel controls; IL6 path via Dedicated Cloud
 - **SIEM export** — Audit logs exportable to Splunk, Elastic, or agency SIEM platforms
 - **API access** — Connect-RPC API for integration with analytical tools and workflows
+
+---
+
+## Scenario: Cross-Topic Analytical Synthesis
+
+**Situation:** An all-source analyst needs to prepare an assessment on supply chain vulnerabilities in the semiconductor sector. Relevant prior reporting is scattered across 4 different analytical teams' products spanning 18 months — economic analysis, technology assessments, country-specific reports, and trade policy memos.
+
+**Before Latent Archon:** The analyst emails colleagues asking "has anyone written about this?", searches SharePoint with keyword queries that return hundreds of irrelevant results, and ultimately writes the assessment based on whatever they personally recall or can find in 2 days of searching.
+
+**With Latent Archon:**
+1. Selects all 4 analytical team workspaces and the trade policy workspace
+2. Asks: *“What prior assessments have addressed semiconductor supply chain vulnerabilities? Summarize key findings and identify any contradictions between assessments.”*
+3. Gets a structured synthesis citing 31 relevant products across all teams, with contradictions flagged (e.g., one team assessed risk as declining while another assessed it as increasing, citing different indicators)
+4. Follow-up: *“Which of these assessments discussed [specific country]'s role? What sources did they rely on?”*
+
+**Result:** 2 days of searching and emailing → 20 minutes. More comprehensive sourcing, contradictions surfaced that would have been missed.
 
 ---
 
@@ -100,4 +116,4 @@ Intelligence Community (IC) agencies and their support organizations produce and
 
 ---
 
-*Document ID: CAP-INTEL-001 | Version: 1.0 | Date: April 2026*
+*Document ID: CAP-INTEL-001 | Version: 1.1 | Date: April 2026*
