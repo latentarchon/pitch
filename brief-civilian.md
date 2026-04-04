@@ -112,11 +112,13 @@ Yes. Workspaces enforce need-to-know. An HR workspace with sensitive personnel d
 ## Contact
 
 **Latent Archon, Inc.**
+- Website & demo: [latentarchon.com](https://latentarchon.com)
 - Email: gcp-security-admins@latentarchon.com
 - Compliance & security documentation: [github.com/latentarchon/compliance](https://github.com/latentarchon/compliance)
+- Capability briefs: [github.com/latentarchon/pitch](https://github.com/latentarchon/pitch)
 - CAGE Code: *(pending)*
 - SAM.gov UEI: *(pending)*
 
 ---
 
-*Document ID: CAP-CIV-001 | Version: 1.1 | Date: April 2026*
+*Document ID: CAP-CIV-001 | Version: 1.2 | Date: April 2026*
