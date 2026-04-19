@@ -52,7 +52,7 @@ Naval forces operate across globally distributed commands — from NAVAIR and NA
 | Ship/squadron/unit isolation | Workspace-level access control — each unit or program gets its own sandbox |
 | Cross-platform search | Query across ship classes, aircraft platforms, or programs with tag-based filtering |
 | Audit trail | Immutable logs, every AI response traceable to source document and page |
-| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
+| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads — GCP holds both FedRAMP High and DoD IL5 Provisional Authorization |
 
 ---
 
@@ -60,7 +60,7 @@ Naval forces operate across globally distributed commands — from NAVAIR and NA
 
 - **Flank Speed (Microsoft 365)** — SharePoint document sync via Microsoft Graph API with delta-based incremental updates, SAML SSO
 - **Navy CAC authentication** — SAML 2.0 federation with Navy ICAM / NMCI identity providers
-- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and US-person-only personnel controls; us-east4 (Northern Virginia)
+- **Google Cloud Platform** — FedRAMP High authorized with DoD IL5 Provisional Authorization; Assured Workloads already deployed with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **DISA STIG compliance** — Containerized deployment follows DoD container hardening guidelines
 - **NIST 800-171 / CMMC alignment** — CUI controls mapped to CMMC Level 2 requirements

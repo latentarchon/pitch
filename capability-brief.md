@@ -47,7 +47,8 @@ Latent Archon provides a secure, authorized alternative:
 - **CUI-compliant** — all data encrypted at rest with customer-managed encryption keys (CMEK) using FIPS 140-2 Level 3 HSM-backed keys
 - **DLP scanning** on every uploaded document — automatic detection and redaction of PII, SSN, credit card numbers before indexing
 - **Malware scanning** on all uploads before processing
-- **Per-tenant data isolation** — row-level security in the database, separate encryption keys per organization
+- **Three-layer data isolation** — (1) database-level tenant isolation, (2) PostgreSQL row-level security (RLS) enforcing tenant boundaries at the query layer, (3) workspace-level application isolation with configurable membership and roles. Even if the application layer has a defect, RLS prevents cross-tenant data access at the database.
+- **Joinable workspaces with need-to-know** — users can be members of multiple workspaces with different roles per workspace. Program managers control membership via admin invite or SCIM provisioning from their IdP. Cross-workspace queries are scoped to only the workspaces a user has been granted access to.
 - **Zero training on government data** — AI models are not fine-tuned on uploaded documents; they are used only at query time for retrieval
 
 ---
@@ -60,7 +61,7 @@ Latent Archon provides a secure, authorized alternative:
 | **Encryption** | AES-256-GCM at rest (CMEK, HSM-backed), TLS 1.3 in transit, per-tenant key isolation |
 | **Authentication** | SAML 2.0 SSO (federal: MFA enforced by agency IdP, e.g., CAC/PIV; non-federal: app TOTP MFA), session concurrency limiting (AC-10) |
 | **Session Management** | Idle timeout (25 min), absolute timeout (12 hr), concurrent session limiting (max 3) |
-| **Access Control** | RBAC with org → workspace → document hierarchy, row-level security in database |
+| **Access Control** | Three-layer isolation: database tenant isolation → PostgreSQL RLS → workspace RBAC. Joinable workspaces with per-workspace roles and need-to-know enforcement |
 | **Data Protection** | DLP scanning on ingest, malware scanning, document-level permissions |
 | **Audit** | Immutable audit logs for all data access, available for export to agency SIEM upon request, Cloud Audit Logs integration |
 | **Infrastructure** | Google Cloud Platform with Assured Workloads (IL4/IL5), VPC-isolated, Private Service Connect, no public endpoints except load balancer |
@@ -88,11 +89,12 @@ Latent Archon runs entirely on Google Cloud Platform in **us-east4 (Northern Vir
 | **Container Registry** | Artifact Registry | CMEK-encrypted, vulnerability scanning, image signing |
 
 ### Why GCP?
-- **FedRAMP High** authorized — meets the bar for Moderate and High baselines
-- **Assured Workloads for IL4/IL5** — data residency, personnel controls, and access transparency built into the platform
-- **IL4 → IL5 with zero migration** — enable Assured Workloads on the same project; no re-deployment, no downtime
+- **GCP is IL5-authorized** — Google Cloud holds both FedRAMP High and DoD IL5 Provisional Authorization
+- **Assured Workloads deployed today** — Latent Archon's federal tier already runs under Assured Workloads with IL5 compliance regime, US-only data residency, and personnel access controls enforced by Google
+- **IL4 → IL5 is a configuration change, not a migration** — no re-deployment, no downtime, no new infrastructure. This is a concrete advantage over platforms that require migration to a separate GovCloud environment
 - **Vertex AI (Gemini)** — native Google AI with no third-party data processing; covered under Google Cloud's FedRAMP authorization
 - **Private Service Connect** — database and internal services never exposed to the public internet
+- **VPC Service Controls** — API-level perimeter preventing data exfiltration even by authorized service accounts acting outside the perimeter
 
 ---
 
@@ -129,11 +131,28 @@ Each tier runs in its own GCP folder with dedicated projects, databases, encrypt
    - Results are grouped by program as requested
    - A synthesis paragraph identifies the three most common justification categories
 
-4. **Verify** — The officer clicks any citation to view the original document passage in context. Every answer is traceable — no hallucination, no unsourced claims.
+4. **Verify** — The officer clicks any citation to view the original document passage in context. Every answer is traceable to its source — analysts verify before acting.
 
 5. **Refine** — The officer follows up: *"Which of these modifications were sole-source? What was the J&A rationale?"* — Latent Archon narrows the search to the same document set and returns cited answers.
 
 **Time saved:** What previously took 2-3 days of manual document review takes 15 minutes.
+
+---
+
+## How We Compare
+
+| | **Latent Archon** | **Palantir AIP** | **Microsoft Copilot for Gov** | **Custom Bedrock/Azure OpenAI** |
+|---|---|---|---|---|
+| **Deployment** | Self-service SaaS, 30-day pilot | Multi-million dollar integration, Palantir engineers required | Tied to M365 tenant | Requires cleared dev team to build |
+| **Data Isolation** | Three-layer: database tenant isolation → PostgreSQL RLS → workspace RBAC | Platform-managed, opaque to customer | Shared M365 tenant architecture | Whatever you build |
+| **Need-to-Know** | Joinable workspaces with per-workspace roles, admin-controlled membership, SCIM provisioning | Configurable but requires Palantir professional services | SharePoint permissions (coarse-grained) | Whatever you build |
+| **Source Citations** | Every response cites exact document and passage; analyst verifies before acting | Varies by configuration | Limited citation granularity | Whatever you build |
+| **Document Types** | Structured namespace — contracts, TMs, policy, intel products — with tag-based filtering | Generic data ontology | M365 file types only | Whatever you build |
+| **CUI Compliance** | FedRAMP-ready, CMEK, DLP, malware scan, immutable audit, IL5 Assured Workloads deployed | FedRAMP authorized | FedRAMP authorized (M365) | Depends on implementation |
+| **Cost** | Per-org subscription, all infrastructure included | $5M–$50M+ multi-year contracts | Per-user M365 licensing + Copilot add-on | Cloud costs + dev team salaries |
+| **Time to Value** | Days (upload docs, start querying) | Months (integration, ontology design, training) | Weeks (if already on M365) | Months (build + ATO) |
+
+**Key differentiator:** Latent Archon is purpose-built for document intelligence with defense-in-depth data isolation. Competing approaches are either general-purpose AI platforms adapted for documents (Palantir, Copilot) or build-it-yourself toolkits (Bedrock, Azure OpenAI) that require significant engineering investment and separate ATO processes.
 
 ---
 

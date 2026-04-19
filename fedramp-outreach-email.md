@@ -9,7 +9,7 @@ Dear FedRAMP 20x Team,
 
 I'm writing to express Latent Archon's interest in participating in the FedRAMP 20x pilot program (Phase 2 or Phase 3, as appropriate).
 
-**What we built:** Latent Archon is a CUI-compliant document intelligence platform that enables federal agencies to upload sensitive documents and query them using AI-powered semantic search and retrieval-augmented generation. Every AI response is sourced and cited from the agency's own documents — no hallucination, no data leakage, full audit trail.
+**What we built:** Latent Archon is a CUI-compliant document intelligence platform that enables federal agencies to upload sensitive documents and query them using AI-powered semantic search and retrieval-augmented generation. Every AI response includes source citations from the agency's own documents — analysts verify before acting, no data leakage, full audit trail.
 
 **Why we're ready:** We've built our platform with FedRAMP 20x KSIs as the design target from day one, not as a retrofit. Our compliance posture includes:
 
@@ -19,7 +19,7 @@ I'm writing to express Latent Archon's interest in participating in the FedRAMP 
 - **Monthly automated red team exercises** (44 attack scenarios across auth bypass, privilege escalation, and data exfiltration — MITRE ATT&CK mapped)
 - **Monthly automated contingency plan testing** (database backup/PITR, storage versioning, container health, KMS key availability)
 - **Significant Change Notification (SCN) classification** enforced as a required CI check on every pull request across all repositories
-- **Google Cloud Platform** with per-tenant CMEK encryption (FIPS 140-2 Level 3 HSM), DLP scanning, and row-level security — leveraging GCP's FedRAMP High authorization and Assured Workloads for IL4/IL5
+- **Google Cloud Platform** with three-layer data isolation (database tenant isolation → PostgreSQL RLS → workspace RBAC), per-tenant CMEK encryption (FIPS 140-2 Level 3 HSM), and DLP scanning — leveraging GCP's FedRAMP High and DoD IL5 Provisional Authorization with Assured Workloads already deployed
 - **SAML/OIDC SSO federation**, MFA enforcement, session concurrency limiting (AC-10), and idle/absolute session timeouts (AC-12)
 
 **Target authorization level:** FedRAMP Moderate

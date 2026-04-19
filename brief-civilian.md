@@ -74,12 +74,12 @@ Federal civilian agencies access Latent Archon at `fed.latentarchon.com`. State 
 SharePoint search is keyword-based. Latent Archon uses semantic search — it understands meaning. Searching for "employee removal procedures" will find documents about "adverse actions" and "termination for cause" even if those exact words aren't in the query.
 
 ### "How is this different from ChatGPT/Copilot?"
-- ChatGPT and Copilot can hallucinate answers from training data. Latent Archon only answers from your documents — every response includes citations.
+- ChatGPT and Copilot answer from training data without source verification. Latent Archon answers from your documents — every response includes citations to the exact document and passage so analysts can verify before acting.
 - ChatGPT sends your data to OpenAI's servers. Latent Archon keeps all data within the FedRAMP authorization boundary with your agency's encryption keys.
 - Copilot requires M365 licensing changes. Latent Archon works alongside existing M365 by syncing documents from SharePoint.
 
 ### "Can we control who sees what?"
-Yes. Workspaces enforce need-to-know. An HR workspace with sensitive personnel data is invisible to someone who only has access to the policy workspace. Row-level security is enforced at the database level, not just the application.
+Yes. Three layers of isolation: (1) database-level tenant isolation, (2) PostgreSQL row-level security enforcing tenant boundaries at the query layer, (3) workspace-level application isolation with configurable membership. An HR workspace with sensitive personnel data is invisible to someone who only has access to the policy workspace — even if the application has a defect, RLS prevents cross-tenant data access at the database. Users can be members of multiple workspaces with different roles in each.
 
 ---
 

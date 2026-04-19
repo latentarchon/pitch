@@ -53,7 +53,7 @@ Law enforcement agencies at every level — federal, state, and local — manage
 | CJIS Security Policy compliance | CJIS v5.9.5 mapped — 10 policy areas MET, 2 INHERITED from GCP, 1 PARTIAL (see compliance docs) |
 | CUI/CJI protection | CMEK encryption (FIPS 140-2 Level 3 HSM), automated DLP scanning, per-agency encryption keys |
 | Agency SSO / CAC / PIV | SAML 2.0 / OIDC federation with any identity provider |
-| Case-level access control | Workspace-level isolation — each case, unit, or program gets its own access-controlled sandbox |
+| Case-level access control | Three-layer isolation: database tenant isolation → PostgreSQL RLS → workspace RBAC. Each case, unit, or program gets its own access-controlled sandbox |
 | Cross-case search | Selective cross-workspace queries — investigators choose which case files to include |
 | Audit trail | Immutable logs, every AI response traceable to source document, audit data available for agency SIEM export |
 | Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia); GCP holds FedRAMP High authorization |

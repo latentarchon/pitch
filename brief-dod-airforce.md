@@ -56,7 +56,7 @@ The Air Force and Space Force manage vast repositories of technical orders, acqu
 | Program/unit isolation | Workspace-level access control — each SPO, squadron, or wing gets its own sandbox |
 | Cross-system search | Query across weapon systems, programs, or commands with tag-based filtering |
 | Auditability | Immutable logs, every AI response traceable to source document |
-| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
+| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads — GCP holds both FedRAMP High and DoD IL5 Provisional Authorization |
 
 ---
 
@@ -64,7 +64,7 @@ The Air Force and Space Force manage vast repositories of technical orders, acqu
 
 - **AF365 (Microsoft 365)** — SharePoint document sync via Microsoft Graph API with delta-based incremental updates, SAML SSO
 - **CAC authentication** — SAML 2.0 federation with Air Force ICAM
-- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and US-person-only personnel controls; us-east4 (Northern Virginia)
+- **Google Cloud Platform** — FedRAMP High authorized with DoD IL5 Provisional Authorization; Assured Workloads already deployed with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **Platform One / Cloud One** — Container-based architecture compatible with AF PaaS environments
 - **DISA STIG compliance** — Follows DoD container hardening guidelines and NIST 800-171

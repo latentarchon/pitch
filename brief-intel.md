@@ -55,7 +55,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 | Source traceability | Every AI response cites the specific document and passage — fully auditable |
 | No model training on data | Zero fine-tuning on government data — models used only at query time for retrieval |
 | Data residency | Deploy in specific cloud region; per-tenant encryption keys; data never leaves boundary |
-| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads (IL4/IL5); GCP holds FedRAMP High authorization |
+| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads — GCP holds both FedRAMP High and DoD IL5 Provisional Authorization |
 
 ---
 
@@ -63,7 +63,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 
 - **Per-organization encryption keys** — Each agency or program gets dedicated CMEK keys; key material never leaves HSM
 - **DLP on every document** — Automatic scanning for PII, SSN, and sensitive patterns before indexing
-- **Row-level security** — Database enforces workspace isolation at the query level, not just the application level
+- **Three-layer data isolation** — (1) database-level tenant isolation, (2) PostgreSQL row-level security enforcing tenant boundaries at the query layer, (3) workspace-level application isolation with joinable workspaces and configurable membership. Even if the application layer has a defect, RLS prevents cross-tenant data access.
 - **Session controls** — MFA enforced, 25-minute idle timeout, 12-hour absolute timeout, concurrent session limiting
 - **Immutable audit trail** — Every document access, search query, and AI response logged with user identity, timestamp, and client IP
 - **Zero data persistence in AI models** — Documents are embedded for search but never used to train or fine-tune the underlying models
@@ -74,7 +74,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 
 - **Microsoft 365 / SharePoint** — Auto-sync from SharePoint sites via Microsoft Graph API (delta-based incremental updates)
 - **SAML 2.0 / OIDC** — Federation with any IC-standard identity provider
-- **Google Cloud Platform** — FedRAMP High authorized; Assured Workloads for IL4/IL5 with data residency and US-person-only personnel controls; us-east4 (Northern Virginia)
+- **Google Cloud Platform** — FedRAMP High authorized with DoD IL5 Provisional Authorization; Assured Workloads already deployed with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **SIEM export** — Audit data available for export to agency SIEM platforms (Splunk, Elastic, etc.) upon request
 - **API access** — Connect-RPC API for integration with analytical tools and workflows
