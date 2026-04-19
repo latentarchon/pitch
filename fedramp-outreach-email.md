@@ -35,7 +35,7 @@ Happy to schedule a call, provide a demo, or share any additional documentation.
 Best regards,
 Andrew Hendel
 CEO, Latent Archon, Inc.
-gcp-security-admins@latentarchon.com
+contact@latentarchon.com
 
 ---
 

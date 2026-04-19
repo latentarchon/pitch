@@ -175,7 +175,7 @@ All infrastructure costs are included — no separate cloud bills, no hidden AI 
 - Founded to solve the document intelligence gap in government
 - Engineering team with cleared personnel and federal contracting experience
 - Website & demo: [latentarchon.com](https://latentarchon.com)
-- Contact: gcp-security-admins@latentarchon.com
+- Contact: contact@latentarchon.com
 - Compliance repository: [github.com/latentarchon/compliance](https://github.com/latentarchon/compliance)
 - Capability briefs: [github.com/latentarchon/pitch](https://github.com/latentarchon/pitch)
 

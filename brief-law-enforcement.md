@@ -127,7 +127,7 @@ Federal law enforcement agencies access Latent Archon at `fed.latentarchon.com` 
 
 **Latent Archon, Inc.**
 - Website & demo: [latentarchon.com](https://latentarchon.com)
-- Email: gcp-security-admins@latentarchon.com
+- Email: contact@latentarchon.com
 - Compliance & security documentation: [github.com/latentarchon/compliance](https://github.com/latentarchon/compliance)
 - CJIS compliance mapping: [github.com/latentarchon/compliance/tree/main/cjis](https://github.com/latentarchon/compliance/tree/main/cjis)
 - Capability briefs: [github.com/latentarchon/pitch](https://github.com/latentarchon/pitch)
