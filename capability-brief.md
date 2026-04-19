@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Latent Archon is a FedRAMP-ready, CUI-compliant document intelligence platform that enables federal agencies to upload, organize, and query sensitive documents using AI-powered semantic search and retrieval-augmented generation (RAG). Analysts ask questions in natural language and receive sourced, cited answers drawn exclusively from their agency's own documents — no data leaves the authorization boundary, no training on government data, and every response is traceable to its source material.
+Latent Archon is a FedRAMP High aligned, IL5-aligned, CUI-compliant document intelligence platform that enables federal agencies to upload, organize, and query sensitive documents using AI-powered semantic search and retrieval-augmented generation (RAG). Analysts ask questions in natural language and receive sourced, cited answers drawn exclusively from their agency's own documents — no data leaves the authorization boundary, no training on government data, and every response is traceable to its source material.
 
 ---
 
@@ -89,7 +89,7 @@ Latent Archon runs entirely on Google Cloud Platform in **us-east4 (Northern Vir
 | **Container Registry** | Artifact Registry | CMEK-encrypted, vulnerability scanning, image signing |
 
 ### Why GCP?
-- **IL5-aligned infrastructure** — deployed on Google Cloud's FedRAMP High / IL5-authorized platform
+- **FedRAMP High aligned and IL5-aligned** — deployed on Google Cloud's FedRAMP High / IL5-authorized platform
 - **Assured Workloads deployed today** — Latent Archon's federal tier already runs under Assured Workloads with IL5 compliance regime, US-only data residency, and personnel access controls enforced by Google
 - **IL4 → IL5 is a configuration change, not a migration** — no re-deployment, no downtime, no new infrastructure. This is a concrete advantage over platforms that require migration to a separate GovCloud environment
 - **Vertex AI (Gemini)** — native Google AI with no third-party data processing; covered under Google Cloud's FedRAMP authorization
@@ -148,7 +148,7 @@ Each tier runs in its own GCP folder with dedicated projects, databases, encrypt
 | **Need-to-Know** | Joinable workspaces with per-workspace roles, admin-controlled membership, SCIM provisioning | Configurable but requires Palantir professional services | SharePoint permissions (coarse-grained) | Whatever you build |
 | **Source Citations** | Every response cites exact document and passage; analyst verifies before acting | Varies by configuration | Limited citation granularity | Whatever you build |
 | **Document Types** | Structured namespace — contracts, TMs, policy, intel products — with tag-based filtering | Generic data ontology | M365 file types only | Whatever you build |
-| **CUI Compliance** | FedRAMP-ready, CMEK, DLP, malware scan, immutable audit, IL5 Assured Workloads deployed | FedRAMP authorized | FedRAMP authorized (M365) | Depends on implementation |
+| **CUI Compliance** | FedRAMP High aligned, IL5-aligned, CMEK, DLP, malware scan, immutable audit, Assured Workloads deployed | FedRAMP authorized | FedRAMP authorized (M365) | Depends on implementation |
 | **Cost** | Per-org subscription, all infrastructure included | $5M–$50M+ multi-year contracts | Per-user M365 licensing + Copilot add-on | Cloud costs + dev team salaries |
 | **Time to Value** | Days (upload docs, start querying) | Months (integration, ontology design, training) | Weeks (if already on M365) | Months (build + ATO) |
 

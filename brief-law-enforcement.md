@@ -56,7 +56,7 @@ Law enforcement agencies at every level — federal, state, and local — manage
 | Case-level access control | Three-layer isolation: database tenant isolation → PostgreSQL RLS → workspace RBAC. Each case, unit, or program gets its own access-controlled sandbox |
 | Cross-case search | Selective cross-workspace queries — investigators choose which case files to include |
 | Audit trail | Immutable logs, every AI response traceable to source document, audit data available for agency SIEM export |
-| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia); GCP holds FedRAMP High authorization |
+| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) — FedRAMP High aligned, deployed on GCP's FedRAMP High-authorized infrastructure |
 | Personnel security | CJIS Security Addendum signed by all personnel with CJI access; US-person-only access via Assured Workloads |
 
 ### CJIS Compliance
