@@ -51,7 +51,7 @@ The U.S. Army generates and consumes an enormous volume of documents across acqu
 | Need-to-know isolation | Three-layer isolation: database tenant isolation → PostgreSQL RLS → workspace RBAC with joinable workspaces |
 | Multi-domain search | Cross-workspace queries across programs while respecting access boundaries |
 | Auditability | Immutable audit logs, audit data available for agency SIEM export, every AI response traceable to source |
-| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads — GCP holds both FedRAMP High and DoD IL5 Provisional Authorization |
+| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) — IL5-aligned, deployed on GCP's FedRAMP High / IL5-authorized infrastructure with Assured Workloads |
 
 ---
 
@@ -59,7 +59,7 @@ The U.S. Army generates and consumes an enormous volume of documents across acqu
 
 - **Army 365 (Microsoft 365)** — SharePoint/OneDrive document sync via Microsoft Graph API with delta-based incremental updates
 - **cArmy / Army SSO** — SAML 2.0 federation for single sign-on
-- **Google Cloud Platform** — FedRAMP High authorized with DoD IL5 Provisional Authorization; Assured Workloads already deployed with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
+- **Google Cloud Platform** — deployed on GCP's FedRAMP High / IL5-authorized infrastructure; Assured Workloads already configured with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **DISA STIG compliance** — Container-based deployment follows DISA container hardening guidelines
 - **NIST 800-171 / CMMC alignment** — CUI controls mapped to CMMC Level 2 requirements

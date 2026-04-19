@@ -55,7 +55,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 | Source traceability | Every AI response cites the specific document and passage — fully auditable |
 | No model training on data | Zero fine-tuning on government data — models used only at query time for retrieval |
 | Data residency | Deploy in specific cloud region; per-tenant encryption keys; data never leaves boundary |
-| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) with Assured Workloads — GCP holds both FedRAMP High and DoD IL5 Provisional Authorization |
+| Cloud platform | Google Cloud Platform in us-east4 (Northern Virginia) — IL5-aligned, deployed on GCP's FedRAMP High / IL5-authorized infrastructure with Assured Workloads |
 
 ---
 
@@ -74,7 +74,7 @@ Intelligence Community (IC) agencies and their support organizations produce and
 
 - **Microsoft 365 / SharePoint** — Auto-sync from SharePoint sites via Microsoft Graph API (delta-based incremental updates)
 - **SAML 2.0 / OIDC** — Federation with any IC-standard identity provider
-- **Google Cloud Platform** — FedRAMP High authorized with DoD IL5 Provisional Authorization; Assured Workloads already deployed with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
+- **Google Cloud Platform** — deployed on GCP's FedRAMP High / IL5-authorized infrastructure; Assured Workloads already configured with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **SIEM export** — Audit data available for export to agency SIEM platforms (Splunk, Elastic, etc.) upon request
 - **API access** — Connect-RPC API for integration with analytical tools and workflows

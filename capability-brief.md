@@ -89,7 +89,7 @@ Latent Archon runs entirely on Google Cloud Platform in **us-east4 (Northern Vir
 | **Container Registry** | Artifact Registry | CMEK-encrypted, vulnerability scanning, image signing |
 
 ### Why GCP?
-- **GCP is IL5-authorized** — Google Cloud holds both FedRAMP High and DoD IL5 Provisional Authorization
+- **IL5-aligned infrastructure** — deployed on Google Cloud's FedRAMP High / IL5-authorized platform
 - **Assured Workloads deployed today** — Latent Archon's federal tier already runs under Assured Workloads with IL5 compliance regime, US-only data residency, and personnel access controls enforced by Google
 - **IL4 → IL5 is a configuration change, not a migration** — no re-deployment, no downtime, no new infrastructure. This is a concrete advantage over platforms that require migration to a separate GovCloud environment
 - **Vertex AI (Gemini)** — native Google AI with no third-party data processing; covered under Google Cloud's FedRAMP authorization
