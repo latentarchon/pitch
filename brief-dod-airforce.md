@@ -68,6 +68,7 @@ The Air Force and Space Force manage vast repositories of technical orders, acqu
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **Platform One / Cloud One** — Container-based architecture compatible with AF PaaS environments
 - **DISA STIG compliance** — Follows DoD container hardening guidelines and NIST 800-171
+- **Air-gapped deployment (prototype)** — Same codebase deploys to disconnected infrastructure via Helm charts with CAC/PIV mTLS authentication, platform-native database and AI services, and Kubernetes NetworkPolicy isolation. Enables classified workloads without forking the application.
 
 Federal customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated GCP environment with Assured Workloads, separate from planned SLTT and commercial tiers. See [deployment-tiers.md](deployment-tiers.md) for architecture details.
 

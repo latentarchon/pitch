@@ -104,16 +104,16 @@ Latent Archon's architecture defines three isolated deployment tiers — same co
 
 All tiers run in us-east4 (Northern Virginia) with CMEK encryption (FIPS 140-2 L3 HSM), DLP scanning, MFA, and immutable audit logs.
 
-| | **Federal** | **SLTT** | **Commercial** |
-|---|---|---|---|
-| **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` |
-| **Status** | **Active** (staging deployed) | Planned | Planned |
-| **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises |
-| **GCP Environment** | Assured Workloads (IL4/IL5) | Assured Workloads | Standard GCP with org policies |
-| **Certification** | FedRAMP Moderate (in progress) | StateRAMP (planned) | SOC 2 (planned) |
-| **Encryption** | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys |
+| | **Federal** | **SLTT** | **Commercial** | **Air-Gapped** |
+|---|---|---|---|---|
+| **Domain** | `fed.latentarchon.com` | `gov.latentarchon.com` | `cloud.latentarchon.com` | Customer-controlled |
+| **Status** | **Active** (staging deployed) | Planned | Planned | **Prototype** |
+| **Customers** | Federal agencies, DoD, IC | State, local, tribal, territorial | Private sector, enterprises | DoD/IC classified programs |
+| **Platform** | GCP Assured Workloads (IL4/IL5) | GCP Assured Workloads | GCP with org policies | Disconnected infrastructure |
+| **Certification** | FedRAMP Moderate (in progress) | StateRAMP (planned) | SOC 2 (planned) | DISA PA (planned) |
+| **Encryption** | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys | CMEK, HSM, per-tenant keys | Platform-managed, FIPS 140-2 |
 
-Each tier runs in its own GCP folder with dedicated projects, databases, encryption keys, VPC networks, and audit logs. No cross-tier data access is possible. See [deployment-tiers.md](deployment-tiers.md) for full architecture details.
+Each tier runs in isolated infrastructure with dedicated databases, encryption keys, networks, and audit logs. No cross-tier data access is possible. The air-gapped prototype deploys the same codebase via Helm charts to disconnected infrastructure with CAC/PIV mTLS authentication. See [deployment-tiers.md](deployment-tiers.md) for full architecture details.
 
 ---
 

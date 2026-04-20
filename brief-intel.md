@@ -10,7 +10,7 @@
 
 Intelligence Community (IC) agencies and their support organizations produce and consume enormous volumes of CUI-level analytical products, policy documents, open-source intelligence reports, and administrative records. Analysts spend significant time locating relevant prior reporting, cross-referencing assessments, and synthesizing information from disparate document collections. Latent Archon provides a CUI-compliant AI platform that enables IC personnel to search, query, and synthesize across document collections using natural language — keeping sensitive data within the authorization boundary while dramatically accelerating the analytical workflow.
 
-**Note:** Latent Archon is designed for CUI/FOUO workloads. It is not intended for classified (Secret/TS/SCI) environments, though the architecture supports future air-gapped deployment for higher classification levels.
+**Note:** Latent Archon is designed for CUI/FOUO workloads on its primary cloud deployment. A prototype air-gapped deployment architecture has been developed for disconnected environments supporting higher classification levels, using the same application codebase with platform-native services. Contact us for details.
 
 ---
 

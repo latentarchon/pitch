@@ -64,6 +64,7 @@ Naval forces operate across globally distributed commands — from NAVAIR and NA
 - **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **DISA STIG compliance** — Containerized deployment follows DoD container hardening guidelines
 - **NIST 800-171 / CMMC alignment** — CUI controls mapped to CMMC Level 2 requirements
+- **Air-gapped deployment (prototype)** — Same codebase deploys to disconnected infrastructure via Helm charts with CAC/PIV mTLS authentication, platform-native database and AI services, and Kubernetes NetworkPolicy isolation. Enables classified workloads without forking the application.
 
 Federal customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated GCP environment with Assured Workloads, separate from planned SLTT and commercial tiers. See [deployment-tiers.md](deployment-tiers.md) for architecture details.
 
