@@ -1,0 +1,221 @@
+direction: down
+
+title: |md
+  # Archon Platform — Network Architecture
+| {
+  near: top-center
+  style.font-size: 28
+}
+
+users: End Users (*.mil / *.gov) {
+  style.fill: "#f5f5f5"
+  style.stroke: "#999"
+}
+
+cloudflare: Cloudflare Edge Network {
+  direction: right
+  style.fill: "#fff7ed"
+  style.stroke: "#ea580c"
+  style.stroke-width: 2
+
+  dns: DNS\nlatentarchon.com {
+    style.fill: "#f97316"
+    style.font-color: "#fff"
+  }
+
+  admin-edge: Admin — *.admin {
+    style.fill: "#fff"
+    style.stroke: "#ea580c"
+
+    waf: WAF\nOWASP + Managed {
+      style.fill: "#f97316"
+      style.font-color: "#fff"
+    }
+    fw: Firewall + Rate Limiting {
+      style.fill: "#f97316"
+      style.font-color: "#fff"
+    }
+    proxy: Zero Trust\nIdentity Proxy\n8h / *.mil *.gov {
+      style.fill: "#f97316"
+      style.font-color: "#fff"
+    }
+    waf -> fw -> proxy
+  }
+
+  app-edge: App — *.app {
+    style.fill: "#fff"
+    style.stroke: "#ea580c"
+
+    waf: WAF\nOWASP + Managed {
+      style.fill: "#f97316"
+      style.font-color: "#fff"
+    }
+    fw: Firewall + Rate Limiting {
+      style.fill: "#f97316"
+      style.font-color: "#fff"
+    }
+    proxy: Zero Trust\nIdentity Proxy\n8h / *.mil *.gov {
+      style.fill: "#f97316"
+      style.font-color: "#fff"
+    }
+    waf -> fw -> proxy
+  }
+
+  dns -> admin-edge.waf
+  dns -> app-edge.waf
+}
+
+gcp: Google Cloud Platform — us-east4 {
+  style.fill: "#eff6ff"
+  style.stroke: "#1565c0"
+  style.stroke-width: 2
+
+  lb: L7 Load Balancers + Cloud Armor (WAF) {
+    style.fill: "#fff"
+    style.stroke: "#d93025"
+
+    lb-admin: HTTPS LB + Cloud Armor\nadmin.latentarchon.com {
+      style.fill: "#ea4335"
+      style.font-color: "#fff"
+    }
+    lb-app: HTTPS LB + Cloud Armor\napp.latentarchon.com {
+      style.fill: "#ea4335"
+      style.font-color: "#fff"
+    }
+  }
+
+  admin-project: Admin Project — Stateless API Surface {
+    style.fill: "#e3f2fd"
+    style.stroke: "#1a73e8"
+
+    admin-spa: Cloud Run\nAdmin SPA {
+      style.fill: "#4285f4"
+      style.font-color: "#fff"
+    }
+    admin-api: Cloud Run\nAdmin API (Go) {
+      style.fill: "#4285f4"
+      style.font-color: "#fff"
+    }
+    admin-vpc: VPC 10.10.0.0/24\nAll egress via Cloud NAT {
+      style.fill: "#7c3aed"
+      style.font-color: "#fff"
+    }
+  }
+
+  app-project: App Project — Stateless API Surface {
+    style.fill: "#e3f2fd"
+    style.stroke: "#1a73e8"
+
+    app-spa: Cloud Run\nApp SPA {
+      style.fill: "#4285f4"
+      style.font-color: "#fff"
+    }
+    app-api: Cloud Run\nApp API (Go) {
+      style.fill: "#4285f4"
+      style.font-color: "#fff"
+    }
+    app-vpc: VPC 10.20.0.0/24\nAll egress via Cloud NAT {
+      style.fill: "#7c3aed"
+      style.font-color: "#fff"
+    }
+  }
+
+  auth-admin: Auth — Admin {
+    style.fill: "#fff8e1"
+    style.stroke: "#f9ab00"
+
+    idp-admin: Identity Platform\nAdmin pool\nOutside VPC SC {
+      style.fill: "#fbbc04"
+    }
+  }
+
+  auth-app: Auth — App {
+    style.fill: "#fff8e1"
+    style.stroke: "#f9ab00"
+
+    idp-app: Identity Platform\nApp pool (12 tenants)\nOutside VPC SC {
+      style.fill: "#fbbc04"
+    }
+  }
+
+  ops-project: Ops Project — Data Tier + Processing {
+    style.fill: "#e8f5e9"
+    style.stroke: "#1e8e3e"
+    style.stroke-width: 2
+
+    ops-vpc: VPC 10.30.1.0/24\nAll egress via Cloud NAT\nStatic IP {
+      style.fill: "#7c3aed"
+      style.font-color: "#fff"
+    }
+    ops-svc: Cloud Run — Ops Service\nInternal ingress only\nCloud Tasks + Scheduler invokers {
+      style.fill: "#4285f4"
+      style.font-color: "#fff"
+    }
+    ops-jobs: Cloud Run Jobs\nBatch operations {
+      style.fill: "#4285f4"
+      style.font-color: "#fff"
+    }
+
+    sql: Cloud SQL — PostgreSQL\nPrivate IP only {
+      style.fill: "#34a853"
+      style.font-color: "#fff"
+    }
+    gcs: GCS — Document Storage\nCMEK encrypted {
+      style.fill: "#34a853"
+      style.font-color: "#fff"
+    }
+    vertex: Vertex AI\nGemini 3.1 Pro + Embeddings\nPSC Endpoint {
+      style.fill: "#34a853"
+      style.font-color: "#fff"
+    }
+    tasks: Cloud Tasks\nAsync queue {
+      style.fill: "#00897b"
+      style.font-color: "#fff"
+    }
+    dlp: Cloud DLP\nPII detection {
+      style.fill: "#00897b"
+      style.font-color: "#fff"
+    }
+    clam: ClamAV\nMalware scanning {
+      style.fill: "#00897b"
+      style.font-color: "#fff"
+    }
+
+    ops-svc -> sql
+    ops-svc -> gcs
+    ops-svc -> vertex
+    ops-svc -> dlp
+    ops-svc -> clam
+    ops-jobs -> ops-svc: {style.stroke-dash: 3}
+  }
+
+  # LB connections
+  lb.lb-admin -> admin-project.admin-spa
+  lb.lb-admin -> admin-project.admin-api
+  lb.lb-app -> app-project.app-spa
+  lb.lb-app -> app-project.app-api
+
+  # API to auth (separate identity pools, separate projects)
+  admin-project.admin-api -> auth-admin.idp-admin: VPC SC\nEgress Policy {style.stroke-dash: 3}
+  app-project.app-api -> auth-app.idp-app: VPC SC\nEgress Policy {style.stroke-dash: 3}
+
+  # APIs enqueue work to ops via Cloud Tasks
+  admin-project.admin-api -> ops-project.tasks: Enqueue {style.stroke-dash: 3}
+  app-project.app-api -> ops-project.tasks: Enqueue {style.stroke-dash: 3}
+  ops-project.tasks -> ops-project.ops-svc: OIDC dispatch
+
+  # Least-privilege DB reads (Cloud SQL Auth Proxy sidecar)
+  admin-project.admin-api -> ops-project.sql: Read/write\n(least-privilege DB role) {
+    style.stroke-dash: 5
+    style.stroke: "#999"
+  }
+  app-project.app-api -> ops-project.sql: Read-only\n(least-privilege DB role) {
+    style.stroke-dash: 5
+    style.stroke: "#999"
+  }
+}
+
+# External connections
+users -> cloudflare.dns
+cloudflare.admin-edge.proxy -> gcp.lb.lb-admin
+cloudflare.app-edge.proxy -> gcp.lb.lb-app
