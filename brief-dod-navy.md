@@ -61,12 +61,11 @@ Naval forces operate across globally distributed commands — from NAVAIR and NA
 - **Flank Speed (Microsoft 365)** — SharePoint document sync via Microsoft Graph API with delta-based incremental updates, SAML SSO
 - **Navy CAC authentication** — SAML 2.0 federation with Navy ICAM / NMCI identity providers
 - **Google Cloud Platform** — deployed on GCP's FedRAMP High / IL5-authorized infrastructure; Assured Workloads already configured with IL5 compliance regime, US-only data residency, and US-person-only personnel controls; us-east4 (Northern Virginia)
-- **IL4 → IL5 with zero migration** — Unlike AWS GovCloud or Azure Government, upgrading from IL4 to IL5 on GCP is a configuration change, not a re-deployment. Same endpoint, same data, no downtime.
 - **DISA STIG compliance** — Containerized deployment follows DoD container hardening guidelines
 - **NIST 800-171 / CMMC alignment** — CUI controls mapped to CMMC Level 2 requirements
 - **Air-gapped deployment (prototype)** — Same codebase deploys to disconnected infrastructure via Helm charts with CAC/PIV mTLS authentication, platform-native database and AI services, and Kubernetes NetworkPolicy isolation. Enables classified workloads without forking the application.
 
-Federal customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated GCP environment with Assured Workloads, separate from planned SLTT and commercial tiers. See [deployment-tiers.md](deployment-tiers.md) for architecture details.
+Federal customers access Latent Archon at `fed.latentarchon.com` — a dedicated, isolated GCP environment with Assured Workloads, separate from planned SLTT and commercial tiers. Production has not been deployed but there is a functional demo accessible at `latentarchon.com`. See our trust center at `trust.latentarchon.com` for security and compliance documentation.
 
 ---
 
@@ -99,12 +98,9 @@ Federal customers access Latent Archon at `fed.latentarchon.com` — a dedicated
 ## Contact
 
 **Latent Archon, Inc.**
-- Website & demo: [latentarchon.com](https://latentarchon.com)
-- Email: contact@latentarchon.com
-- Compliance & security documentation: [github.com/latentarchon/compliance](https://github.com/latentarchon/compliance)
-- Capability briefs: [github.com/latentarchon/pitch](https://github.com/latentarchon/pitch)
-- CAGE Code: *(pending)*
-- SAM.gov UEI: *(pending)*
+- Website & demo: `latentarchon.com`
+- Trust center: `trust.latentarchon.com`
+- Email: `contact@latentarchon.com`
 
 ---
 
